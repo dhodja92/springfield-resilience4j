@@ -41,7 +41,7 @@ class BookRestClient implements BookClient {
     }
 
     private PagedResponse<BookDto> fallbackGetBooks(int page, int size, Exception ex) {
-        log.warn("Error executing Data Service HTTP request, recovering by returning null, error: {}", ex.getMessage());
+        log.warn("Error executing HTTP request, recovering by returning null, error: {}", ex.getMessage());
         return new PagedResponse<>(List.of(), PagedResponse.PageMetadata.empty());
     }
 
