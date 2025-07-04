@@ -1,1 +1,3 @@
-rootProject.name = 'resilience4j'
+rootProject.name = 'springfield-resilience4j'
+
+include 'api-server'
