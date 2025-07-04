@@ -54,7 +54,7 @@ The client will start on port 8081.
 ## Testing the Application
 Once both applications are running:
 
-1. Access the client application at http://localhost:8081
+1. Access the client application at http://localhost:8081/books
 2. The client application will display books retrieved from the server
 3. You can test resilience patterns by stopping the server application and observing how the client handles the failure
 
