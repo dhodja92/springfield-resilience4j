@@ -1,3 +1,4 @@
 rootProject.name = 'springfield-resilience4j'
 
 include 'api-server'
+include 'api-client'

@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "resilience4j.rest-client.api-server.connect-timeout-seconds",
+      "type": "java.lang.Integer",
+      "description": "Connect timeout in seconds for the RestClient used to communicate with Resilience4J API Server."
+    },
+    {
+      "name": "resilience4j.rest-client.api-server.read-timeout-seconds",
+      "type": "java.lang.Integer",
+      "description": "Read timeout in seconds for the RestClient used to communicate with Resilience4J API Server."
+    },
+    {
+      "name": "resilience4j.rest-client.api-server.base-url",
+      "type": "java.lang.String",
+      "description": "Base URL of Resilience4J API Server."
+    }
+  ]
+}
