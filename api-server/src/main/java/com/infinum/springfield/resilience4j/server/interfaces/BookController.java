@@ -27,7 +27,7 @@ class BookController {
 
     @GetMapping
     ResponseEntity<PagedModel<Book>> getAllBooks(Pageable pageable) {
-        return ResponseEntity.ok(new PagedModel<>(this.bookRepository.findAll(pageable)));
+        return ResponseEntity.ok(new PagedModel<>(this.bookRepository.findAllWithSimulatedFailures(pageable)));
     }
 
 }
