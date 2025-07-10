@@ -11,13 +11,17 @@ import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.LongSupplier;
 
 @ReadOnlyTransactionalRepository
 class BookRepositoryImpl implements BookRepository {
+
+    private static final Random RANDOM = new Random();
 
     private static final String FIND_BOOK_BY_ID = """
             SELECT id, title, isbn, number_of_pages
@@ -68,6 +72,32 @@ class BookRepositoryImpl implements BookRepository {
         LongSupplier bookCountSupplier = () -> this.jdbcOperations.queryForObject(
                 BOOK_COUNT, EmptySqlParameterSource.INSTANCE, Long.class);
         return PageableExecutionUtils.getPage(books, pageable, bookCountSupplier);
+    }
+
+    @Override
+    public Page<Book> findAllWithSimulatedFailures(Pageable pageable) {
+        int num = getRandomNumberUsingNextInt(1, 10);
+        if (num < 9) {
+            throw new RuntimeException("Simulated failure");
+        }
+        return findAll(pageable);
+    }
+
+    @Override
+    public Page<Book> findAllWithSimulatedSlowness(Pageable pageable) {
+        int num = getRandomNumberUsingNextInt(1, 10);
+        if (num < 9) {
+            try {
+                Thread.sleep(Duration.ofSeconds(10));
+            } catch (InterruptedException e) {
+                //
+            }
+        }
+        return findAll(pageable);
+    }
+
+    private int getRandomNumberUsingNextInt(int min, int max) {
+        return RANDOM.nextInt(max - min) + min;
     }
 
 }

@@ -9,4 +9,9 @@ public interface BookRepository {
     Optional<Book> findById(Long id);
 
     Page<Book> findAll(Pageable pageable);
+
+    Page<Book> findAllWithSimulatedFailures(Pageable pageable);
+
+    Page<Book> findAllWithSimulatedSlowness(Pageable pageable);
+
 }
